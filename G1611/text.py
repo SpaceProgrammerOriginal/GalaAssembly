@@ -1,6 +1,11 @@
-import re
+import re as _re
+import os as _os
 
 def tokenize_code(code : str) -> list[list[str]]:
+
+    """
+    Converts the code to a splitted understandable list for the compiler
+    """
 
     #this function comes from the Simply programming language, made by me :)
 
@@ -35,7 +40,7 @@ def tokenize_code(code : str) -> list[list[str]]:
 
     for idx in range(len(commands)):
         if commands[idx][0] == "CJUMP":
-            match = re.match(r"^(.+?\b)(.+?\b)(.+?\b)", commands[idx][1]) #separate text from operators with regex
+            match = _re.match(r"^(.+?\b)(.+?\b)(.+?\b)", commands[idx][1]) #separate text from operators with regex
 
             #get the groups and append
             match_groups = match.groups()
@@ -46,3 +51,15 @@ def tokenize_code(code : str) -> list[list[str]]:
 
     return commands
     
+def save_ram_image(filename : _os.PathLike, compiled_code : str):
+
+    """
+    Puts a compiled code in hexadecimal to a file to be read by Logisim as a ram image.
+    Format used: v2.0 raw
+    """
+
+    FORMAT = "v2.0 raw\n"
+
+    with open(filename, "w") as file:
+        file.write(FORMAT + compiled_code)
+
