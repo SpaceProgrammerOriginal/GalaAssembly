@@ -2,6 +2,8 @@ import re
 
 def tokenize_code(code : str) -> list[list[str]]:
 
+    #this function comes from the Simply programming language, made by me :)
+
     comment_split = code.split("#") #split by comentaris
 
     comment_split = [splitted.split("\n") for splitted in comment_split] #split in lines, as comments cover full lines
