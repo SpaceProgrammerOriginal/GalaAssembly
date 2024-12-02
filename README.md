@@ -91,28 +91,27 @@ WUPP p0, 0;
 WLOW p0, 12;
 
 #loop
-#adding
-COPY r3, alu-a;
-COPY r4, alu-b;
-ALU add;
-#copy result + push back
-COPY r3, r4;
-COPY r3, alu-r;
-#add to iterator
-COPY r1, alu-a;
-COPY r2, alu-b;
-ALU add;
-COPY alu-r, r1;
-CJUMP r1 < r0;
+    #adding
+    COPY r3, alu-a;
+    COPY r4, alu-b;
+    ALU add;
+    #copy result + push back
+    COPY r3, r4; 
+    COPY r3, alu-r;
+    #add to iterator
+    COPY r1, alu-a;
+    COPY r2, alu-b;
+    ALU add;
+    COPY alu-r, r1;
+    CJUMP r1 < r0;
 #end of the loop
 
 #saving result to ram
-#selecting address
-WUPP p0, 255;
-WLOW p0, 255;
-#saving
-WRAM p0, r3;
+    #selecting address
+    WUPP p0, 255;
+    WLOW p0, 255;
+    #saving
+    WRAM p0, r3;
 
-#halting
-HALT;
+HALT; #halting
 ```
