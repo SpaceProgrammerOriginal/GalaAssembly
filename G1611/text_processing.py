@@ -23,16 +23,11 @@ def tokenize_code(code : str) -> list[list[str]]:
     #split parameters from opcodes
     commands = [command.split(",") for command in commands if command != ""] #delete empty str and split by comma
 
-    print(commands)
-
     #split opcode of first parameter
     for idx in range(len(commands)):
         sub_command = commands[idx][0].lstrip().split(" ") #deleting tabing with the lstrip()
         commands[idx][0] = sub_command[0] #the opcode set it to the first argument
         commands[idx].insert(1, "".join(sub_command[1:])) #the rest insert directly
-
-    print()
-    print(commands)
 
     commands = [[sub_command.strip() for sub_command in command if sub_command != ""] for command in commands] #strip
 
@@ -40,8 +35,6 @@ def tokenize_code(code : str) -> list[list[str]]:
 
     for idx in range(len(commands)):
         if commands[idx][0] == "CJUMP":
-            print()
-            print(commands[idx][1])
             match = re.match(r"^(.+?\b)(.+?\b)(.+?\b)", commands[idx][1]) #separate text from operators with regex
 
             #get the groups and append
