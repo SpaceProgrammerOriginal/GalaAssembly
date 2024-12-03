@@ -59,8 +59,6 @@ The first thing to consider is the instructions of the arquitecture:
 
 There are also comments with `#`, but note that they only work in blank lines.
 
-(Falta explicació)
-
 #### Example code
 
 This code computes the Fibonacci sequence (maximum explicit possible) to the number in r0 specified (in this case 10):
@@ -114,4 +112,25 @@ WLOW p0, 12;
     WRAM p0, r3;
 
 HALT; #halting
+```
+
+### Direct compile...
+
+Once you have a file with code you can compile directly calling `GalaAssembly.ARQUITECTURE_NAME.compiler.full_compile()`
+where ARQUITECTURE_NAME is G1611 until now, because Galaicum16v1_1 is the only arquitecture available.
+
+`full_compile()` does directly read a file and save the compiled code in another file.
+
+### ...or compile by parts
+
+If you want to compile by parts, the steps to fully compile a file are:
+
+```
+1- read the file
+2- tokenize the code with:
+    GalaAssembly.ARQUITECTURE_NAME.text.tokenize_code(code)
+3- compile tokenized:
+    GalaAssembly.ARQUITECTURE_NAME.compiler.compile_tokenized(tokenized_code)
+4- save the result as a ram image that can be read by Logisim:
+    GalaAssembly.ARQUITECTURE_NAME.text.save_ram_image(filename, compiled_code)
 ```
